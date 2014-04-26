@@ -66,6 +66,7 @@ Cache::Cache(MemorySystem *gms, const char *section, const char *name)
 
   ,switchingOffCounter("%s:switchingOffCounter", name)
   ,switchingOnCounter("%s:switchingOnCounter", name)
+  ,cyclesLinesOn("%s:cyclesLinesOn", name)
 
   ,readHit("%s:readHit", name)
   ,writeHit("%s:writeHit", name)
@@ -260,10 +261,10 @@ void Cache::switchOffWays (MemRequest *mreq)
 
   double total2 = readMiss2.getDouble() + writeMiss2.getDouble();
   long long data2;
-  int numLinesOn = 0;
+  int numLinesOn;
 
   if ((total2 / 1000) == 1) {
-     prevclocktick = currentclocktick;
+     prevclocktick = 0;
      numLinesOn = cacheBanks[0]->getNumLines();
   }
   
@@ -287,7 +288,6 @@ void Cache::switchOffWays (MemRequest *mreq)
        int k;
        int numLines = (cacheBanks[0]->getNumLines()/16);//switch off one way
        for (k = 0; k < (numLines) ; k++) {
-       //Line *l = getCacheBank(mreq->getPAddr())->readLine(mreq->getPAddr());
        Line *l = cacheBanks[0]->getPLine(k); 
        l->switchOffLine();
        switchingOffCounter.inc();
@@ -297,31 +297,30 @@ void Cache::switchOffWays (MemRequest *mreq)
 
     }
    else if (total2 >= 80 && total2 < 100)
-    {
-       int k;
-       int numLines = (cacheBanks[0]->getNumLines()/16); //switch on one way
-       for (k = 0; k < (numLines) ; k++) {
-       //Line *l = getCacheBank(mreq->getPAddr())->readLine(mreq->getPAddr());
+   { 
+     int k;
+     int numLines = (cacheBanks[0]->getNumLines()/16); //switch on one way
+     for (k = 0; k < (numLines) ; k++) {
+     Line *l = cacheBanks[0]->getPLine(k); 
+     if (l->isLineOn() ==2)
+     {
+     }
+     else
+     { 
+       l->switchOnLine();
+       switchingOnCounter.inc();
+     }
+     }
+     for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
        Line *l = cacheBanks[0]->getPLine(k); 
-       if (l->isLineOn() ==2)
-         {
-         }
-       else
-       { 
-         l->switchOnLine();
-         switchingOnCounter.inc();
-       }
-       }
-       for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
-         Line *l = cacheBanks[0]->getPLine(k); 
-         if (l->isLineOn())
-           numLinesOn++;     
-      }
-    }
+       if (l->isLineOn())
+         numLinesOn++;     
+     }
+   }
 
-    else if (total2 >= 100) {
-    int k;
-    int numLines = (cacheBanks[0]->getNumLines()/8);//switch on two ways
+   else if (total2 >= 100) {
+     int k;
+      int numLines = (cacheBanks[0]->getNumLines()/8);//switch on two ways
     for (k = 0; k < (numLines) ; k++) {
     //Line *l = getCacheBank(mreq->getPAddr())->readLine(mreq->getPAddr());
        Line *l = cacheBanks[0]->getPLine(k);
