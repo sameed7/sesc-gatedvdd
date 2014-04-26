@@ -1,0 +1,8 @@
+
+$(OBJ)/libpint.a:$(OBJ)/PPCDecoder.o
+$(OBJ)/PPCDecoder.o: /home/student/ms2788/project/sesc/src/libpint/PPCDecoder.cpp $(SRC_DIR)/libsuc/nanassert.h /home/student/ms2788/project/sesc/src/libpint/PPCDecoder.h /home/student/ms2788/project/sesc/src/libpint/PPCInsts.def /home/student/ms2788/project/sesc/src/libpint/PPCOpcodes.h $(SRC_DIR)/libll/InstType.h
+
+
+
+
+

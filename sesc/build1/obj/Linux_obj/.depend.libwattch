@@ -1,0 +1,13 @@
+
+$(OBJ)/libwattch.a:$(OBJ)/wattch_power.o $(OBJ)/wattch_setup.o $(OBJ)/wattch_time.o $(OBJ)/wattch_io.o $(OBJ)/wattch_cache.o $(OBJ)/wattch_misc.o
+$(OBJ)/wattch_setup.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_setup.cpp /home/student/ms2788/project/sesc/src/libpower/wattch/setup.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_setup.h /home/student/ms2788/project/sesc/src/libpower/wattch/machine.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_power.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_cache.h /home/student/ms2788/project/sesc/src/libpower/wattch/host.h /home/student/ms2788/project/sesc/src/libpower/wattch/misc.h
+$(OBJ)/wattch_cache.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_cache.c /home/student/ms2788/project/sesc/src/libpower/wattch/host.h /home/student/ms2788/project/sesc/src/libpower/wattch/misc.h /home/student/ms2788/project/sesc/src/libpower/wattch/machine.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_cache.h
+$(OBJ)/wattch_io.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_io.c /home/student/ms2788/project/sesc/src/libpower/wattch/def.h
+$(OBJ)/wattch_misc.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_misc.c /home/student/ms2788/project/sesc/src/libpower/wattch/host.h /home/student/ms2788/project/sesc/src/libpower/wattch/misc.h /home/student/ms2788/project/sesc/src/libpower/wattch/machine.h
+$(OBJ)/wattch_power.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_power.c /home/student/ms2788/project/sesc/src/libpower/wattch/machine.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_power.h /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_cache.h /home/student/ms2788/project/sesc/src/libpower/wattch/host.h /home/student/ms2788/project/sesc/src/libpower/wattch/misc.h /home/student/ms2788/project/sesc/src/libpower/wattch/setup.h
+$(OBJ)/wattch_time.o: /home/student/ms2788/project/sesc/src/libpower/wattch/wattch_time.c /home/student/ms2788/project/sesc/src/libpower/wattch/def.h
+
+
+
+
+

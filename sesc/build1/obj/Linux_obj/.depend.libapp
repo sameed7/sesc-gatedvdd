@@ -1,0 +1,13 @@
+
+$(OBJ)/libapp.a:$(OBJ)/sesc_thread.o $(OBJ)/sesc_events.o $(OBJ)/sesc_locks.o $(OBJ)/sesc_fortran.o $(OBJ)/sesc_chud.o
+$(OBJ)/sesc_events.o: /home/student/ms2788/project/sesc/src/libapp/sesc_events.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+$(OBJ)/sesc_fortran.o: /home/student/ms2788/project/sesc/src/libapp/sesc_fortran.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+$(OBJ)/sesc_locks.o: /home/student/ms2788/project/sesc/src/libapp/sesc_locks.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+$(OBJ)/sesc_thread.o: /home/student/ms2788/project/sesc/src/libapp/sesc_thread.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+$(OBJ)/sesc_tls.o: /home/student/ms2788/project/sesc/src/libapp/sesc_tls.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+$(OBJ)/sesc_ts.o: /home/student/ms2788/project/sesc/src/libapp/sesc_ts.c /home/student/ms2788/project/sesc/src/libapp/sescapi.h /home/student/ms2788/project/sesc/src/libapp/simicsapi.h
+
+
+
+
+

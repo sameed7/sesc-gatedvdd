@@ -1,0 +1,241 @@
+#BEGIN Configuration used. Extracted from "power.conf":
+NoMigration=true
+technology='techParam'
+pageSize  =4096
+cpucore[0:31]='issueX'
+procsPerNode=32
+[FXDTLB]
+RdHitEnergy=3.593147e-01
+assoc     =4
+RdMissEnergy=7.186294e-01
+replPolicy='LRU'
+size      =512
+WrMissEnergy=7.186294e-01
+deviceType='cache'
+bsize     =8
+WrHitEnergy=3.593147e-01
+[voidDevice]
+deviceType='void'
+[DMemory]
+maxWrites =8
+writePolicy='WT'
+portOccp  =1
+lowerLevel="L1L2Bus L1L2"
+WrHitEnergy=2.354971e+00
+size      =32768
+hitDelay  =2
+assoc     =4
+bsize     =32
+RdHitEnergy=2.354971e+00
+MSHR      ='DMSHR'
+missDelay =1
+replPolicy='LRU'
+numPorts  =2
+RdMissEnergy=4.709942e+00
+deviceType='cache'
+WrMissEnergy=4.709942e+00
+[FXClusterIssueX]
+schedDelay=1
+iBJUnit   ='ALUIssueX'
+iMultLat  =4
+iStoreLat =1
+recycleAt ='Execute'
+wakeUpPortOccp=1
+schedPortOccp=1
+iDivUnit  ='ALUIssueX'
+iALUUnit  ='ALUIssueX'
+iDivLat   =12
+winSize   =80
+wakeUpNumPorts=4
+wakeupDelay=3
+iBJLat    =1
+iALULat   =1
+iStoreUnit='LDSTIssueX'
+iLoadLat  =1
+iLoadUnit ='LDSTIssueX'
+iMultUnit ='ALUIssueX'
+schedNumPorts=4
+[Memory]
+replPolicy='LRU'
+size      =64
+MSHR      ='NoMSHR'
+assoc     =1
+hitDelay  =469
+bsize     =64
+numPorts  =1
+missDelay =469
+WrHitEnergy=0.000000e+00
+WrMissEnergy=0.000000e+00
+deviceType='niceCache'
+lowerLevel='voidDevice'
+RdMissEnergy=0.000000e+00
+portOccp  =1
+RdHitEnergy=0.000000e+00
+[FPIssueX]
+Num       =3
+Occ       =1
+[FPClusterIssueX]
+schedPortOccp=1
+recycleAt ='Execute'
+wakeupDelay=3
+fpMultLat =2
+fpALULat  =1
+fpMultUnit='FPIssueX'
+winSize   =32
+wakeUpNumPorts=4
+wakeUpPortOccp=1
+fpALUUnit ='FPIssueX'
+fpDivUnit ='FPIssueX'
+schedNumPorts=4
+schedDelay=1
+fpDivLat  =10
+[issueX]
+iALUEnergy=3.417957e-01
+stqRdWrEnergy=6.086687e+00
+windowRdWrEnergy=5.990468e-01
+interClusterLat=2
+bpredEnergy=1.787476e-01
+areaFactor=1.006250e+00
+itlb      ='FXITLB'
+intRegs   =96
+windowSelEnergy=1.558390e-02
+renameEnergy=4.502677e-01
+ldqCheckEnergy=2.874168e-01
+fetchWidth=4
+OSType    ='dummy'
+maxLoads  =56
+bb4Cycle  =1
+windowCheckEnergy=1.321719e-01
+forwardBusEnergy=7.619968e-02
+fpALUEnergy=1.047439e+00
+resultBusEnergy=7.619968e-02
+robEnergy =1.581295e-01
+renameDelay=3
+wrRegEnergy=8.308310e-01
+ldqRdWrEnergy=5.955995e+00
+rasEnergy =1.588962e-01
+decodeDelay=6
+dtlb      ='FXDTLB'
+btbEnergy =4.287815e-01
+retireWidth=5
+maxStores =56
+issueWidth=4
+robSize   =176
+rdRegEnergy=8.308310e-01
+maxIRequests=4
+maxBranches=64
+fpRegs    =80
+stqCheckEnergy=2.874168e-01
+cluster[1:1]='FPClusterIssueX'
+cluster   ='FXClusterIssueX'
+regFileDelay=3
+dataSource="DMemory DL1"
+instrSource="IMemory IL1"
+enableICache=true
+inorder   =false
+stForwardDelay=2
+bpred     ='BPredIssueX'
+instQueueSize=8
+[L2Cache]
+assoc     =8
+size      =524288
+RdHitEnergy=8.557303e+00
+deviceType='smpcache'
+hitDelay  =9
+portOccp  =2
+lowerLevel="SystemBus SysBus sharedBy 32"
+RdMissEnergy=1.711461e+01
+numPorts  =2
+MSHR      ='L2MSHR'
+replPolicy='LRU'
+missDelay =11
+WrMissEnergy=1.711461e+01
+WrHitEnergy=8.557303e+00
+protocol  ='MESI'
+bsize     =32
+[NoMSHR]
+size      =128
+bsize     =64
+type      ='none'
+[FXITLB]
+bsize     =8
+replPolicy='LRU'
+WrMissEnergy=7.186294e-01
+WrHitEnergy=3.593147e-01
+deviceType='cache'
+size      =512
+RdMissEnergy=7.186294e-01
+RdHitEnergy=3.593147e-01
+assoc     =4
+[iMSHR]
+bsize     =32
+size      =32
+type      ='single'
+[L2MSHR]
+bsize     =32
+size      =64
+type      ='single'
+[BPredIssueX]
+rasSize   =32
+historySize=11
+l2size    =16384
+btbReplPolicy='LRU'
+Metasize  =16384
+MetaBits  =2
+localBits =2
+btbAssoc  =2
+l2Bits    =1
+localSize =16384
+type      ='hybrid'
+BTACDelay =0
+btbBsize  =1
+btbSize   =2048
+[L1L2Bus]
+numPorts  =1
+lowerLevel="L2Cache L2 sharedBy 1"
+delay     =1
+portOccp  =1
+deviceType='bus'
+[SystemBus]
+delay     =1
+deviceType='systembus'
+BusEnergy =3.000000e-02
+numPorts  =1
+portOccp  =1
+lowerLevel="MemoryBus MemoryBus"
+[MemoryBus]
+portOccp  =8
+lowerLevel="Memory Memory"
+delay     =15
+numPorts  =1
+deviceType='bus'
+[IMemory]
+RdMissEnergy=4.709942e+00
+MSHR      ='iMSHR'
+missDelay =1
+size      =32768
+deviceType='icache'
+assoc     =4
+WrHitEnergy=2.354971e+00
+portOccp  =1
+writePolicy='WT'
+bsize     =32
+WrMissEnergy=4.709942e+00
+hitDelay  =2
+lowerLevel="L1L2Bus L1L2"
+numPorts  =2
+replPolicy='LRU'
+RdHitEnergy=2.354971e+00
+[LDSTIssueX]
+Num       =2
+Occ       =1
+[DMSHR]
+size      =64
+type      ='single'
+bsize     =32
+[ALUIssueX]
+Num       =2
+Occ       =1
+[techParam]
+frequency =5.000000e+09
+#END Configuration used. Extracted from "power.conf":

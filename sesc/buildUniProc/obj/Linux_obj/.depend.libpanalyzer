@@ -1,0 +1,15 @@
+
+$(OBJ)/libpanalyzer.a:$(OBJ)/technology.o $(OBJ)/circuit.o $(OBJ)/logic.o $(OBJ)/support.o $(OBJ)/microstrip.o $(OBJ)/clock.o
+$(OBJ)/circuit.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/circuit.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h
+$(OBJ)/clock.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/clock.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/circuit.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/clock.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/support.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/logic.h
+$(OBJ)/io.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/io.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/io.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/circuit.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/microstrip.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h
+$(OBJ)/logic.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/logic.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/logic.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/support.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/circuit.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h
+$(OBJ)/microstrip.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/microstrip.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/microstrip.h
+$(OBJ)/random_logic.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/random_logic.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/random_logic.h
+$(OBJ)/support.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/support.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/logic.h /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h
+$(OBJ)/technology.o: /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.c /home/student/ms2788/project/sesc/src/libpower/panalyzer/technology.h
+
+
+
+
+
