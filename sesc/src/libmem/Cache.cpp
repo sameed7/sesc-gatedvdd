@@ -236,10 +236,10 @@ void Cache::access(MemRequest *mreq)
 
   switch(mreq->getMemOperation()){
   case MemReadW:
-  case MemRead:    {read(mreq); switchOffWays(mreq);}       break;
-  case MemWrite:   {write(mreq);switchOffWays(mreq);}       break;
-  case MemPush:    {pushLine(mreq); switchOffWays(mreq);}   break;
-  default:         {specialOp(mreq); switchOffWays(mreq);}  break;
+  case MemRead:    {read(mreq); switchOffWays (mreq);}       break;
+  case MemWrite:   {write(mreq); switchOffWays (mreq);}       break;
+  case MemPush:    {pushLine(mreq);switchOffWays (mreq);}   break;
+  default:         {specialOp(mreq);switchOffWays (mreq);}  break;
   }
 }
 
@@ -252,7 +252,7 @@ void Cache::read(MemRequest *mreq)
   //enforcing max ops/cycle for the specific bank
   doReadBankCB::scheduleAbs(nextBankSlot(mreq->getPAddr()), this, mreq);
 }
-
+/*
 void Cache::switchOffWays (MemRequest *mreq)
 {
 
@@ -355,7 +355,103 @@ void Cache::switchOffWays (MemRequest *mreq)
 
   data2 = numLinesOn * cyclesElapsed;
   cyclesLinesOn.setValue(data2);
+}*/
+
+void Cache::switchOffWays (MemRequest *mreq)
+{
+  currentclocktick = globalClock;
+  Time_t cyclesElapsed;
+  double total2 = readMiss2.getDouble() + writeMiss2.getDouble();
+  long long data2;
+  int numLinesOn = 0;
+  long long nAccess2 = nAccesses[0]->getValue() ;
+  int k;
+
+  if ((nAccess2 / 100) == 1) {
+     prevclocktick = 0;
+     //numLinesOn = cacheBanks[0]->getNumLines();
+  }
+  if (nAccess2 %  100 == 0)
+  {
+    for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
+      Line *l = cacheBanks[0]->getPLine(k); 
+      if ((l->isLineOn())==2)
+        numLinesOn++;
+    }  
+    if (total2 < 3 && total2 >= 0)
+    {
+       int k;
+       int numLines = (cacheBanks[0]->getNumLines()/8);//switch off two ways
+       for (k = 0; k < (numLines) ; k++) {
+         Line *l = cacheBanks[0]->getPLine(k); 
+         l->switchOffLine();
+         switchingOffCounter.inc();
+       }  
+       //numLinesOn = (7/8)*(cacheBanks[0]->getNumLines());  
+    }
+    else if (total2 >= 3 && total2 < 5){
+      int k;
+      int numLines = (cacheBanks[0]->getNumLines()/16);//switch off one way
+      for (k = 0; k < (numLines) ; k++) {
+        Line *l = cacheBanks[0]->getPLine(k); 
+        l->switchOffLine();
+        switchingOffCounter.inc();
+      }
+      //numLinesOn = (15/16)*(cacheBanks[0]->getNumLines());  
+    }
+    else if (total2 >= 8 && total2 < 10)
+    { 
+      int k;
+      int numLines = (cacheBanks[0]->getNumLines()/16); //switch on one way
+      for (k = 0; k < (numLines) ; k++) {
+        Line *l = cacheBanks[0]->getPLine(k); 
+        if (l->isLineOn() ==2){}
+        else {
+          l->switchOnLine();
+          switchingOnCounter.inc();
+        }
+      }
+      //for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
+      //  Line *l = cacheBanks[0]->getPLine(k); 
+      //  if (l->isLineOn())
+      //    numLinesOn++;     
+      //}
+    }
+    else if (total2 >= 10) {
+      int k;
+      int numLines = (cacheBanks[0]->getNumLines()/8);//switch on two ways
+      for (k = 0; k < (numLines) ; k++) {
+        Line *l = cacheBanks[0]->getPLine(k);
+        if (l->isLineOn() == 2) {}
+        else {
+          l->switchOnLine();
+	  switchingOnCounter.inc();
+        }
+      }
+      //for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
+      //  Line *l = cacheBanks[0]->getPLine(k); 
+      //  if (l->isLineOn())
+      //    numLinesOn++; 
+      //}
+    }
+    else {
+      int k;
+      //for (k = 0; k < cacheBanks[0]->getNumLines(); k++) {
+      //  Line *l = cacheBanks[0]->getPLine(k); 
+      //  if (l->isLineOn())
+      //    numLinesOn++;  
+      //} 
+    }
+    readMiss2.setZero();
+    writeMiss2.setZero(); 
+    cyclesElapsed = globalClock - prevclocktick;  
+    data2 = numLinesOn * cyclesElapsed;
+    prevclocktick = globalClock;
+   
+    cyclesLinesOn.setValueInc(data2);
+  }    
 }
+ 
 
 void Cache::doReadBank(MemRequest *mreq)
 { 
